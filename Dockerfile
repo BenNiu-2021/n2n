@@ -4,7 +4,7 @@ COPY . /n2n/
 
 WORKDIR /n2n/
 
-RUN apt-get update && apt-get install -y gcc libc6-dev libssl-dev ca-certificates make git\
+RUN apt-get update && apt-get install -y autoconf automake gcc libc6-dev libssl-dev ca-certificates make git\
     && chmod +x ./autogen.sh && bash ./autogen.sh && ./configure && make && make install
 
 
