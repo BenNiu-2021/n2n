@@ -1,11 +1,13 @@
 FROM debian:stretch AS builder
 
-COPY . /n2n/
 
-WORKDIR /n2n/
-
-RUN apt-get update && apt-get install -y autoconf automake gcc libc6-dev libssl-dev ca-certificates make git\
-    && chmod +x ./autogen.sh && bash ./autogen.sh && ./configure && make && make install
+RUN apt-get update && apt-get install -y build-essential autoconf automake libtool gcc libc6-dev libssl-dev ca-certificates make git \
+    && git clone https://github.com/ntop/n2n.git -b dev \
+    && cd n2n/ \
+    && git reset --hard 92dfa67 \
+    && ./autogen.sh \
+    && ./configure \
+    && make && make install
 
 
 FROM debian:stretch
