@@ -5,7 +5,7 @@ COPY . /n2n/
 
 WORKDIR /n2n/
 
-RUN apt-get update && apt-get install -y subversion build-essential libssl-dev autoconf \
+RUN apt-get update && apt-get install -y gcc libc6-dev libssl-dev ca-certificates make\
     && chmod +x ./autogen.sh && bash ./autogen.sh && ./configure && make && make install
 
 
