@@ -1,13 +1,12 @@
 FROM debian:stretch AS builder
 
-ARG DEBIAN_FRONTEND=noninteractive
 
 COPY . /n2n/
 
 WORKDIR /n2n/
 
-RUN ./autogen.sh && ./configure && make && make install
-
+RUN apt-get update && apt-get install subversion build-essential libssl-dev autoconf \
+    && chmod +x ./autogen.sh && bash ./autogen.sh && ./configure && make && make install
 
 
 FROM debian:stretch
